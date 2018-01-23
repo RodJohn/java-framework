@@ -1,0 +1,52 @@
+plugins {
+    id 'org.springframework.boot' version '1.5.9.RELEASE'
+    id 'net.ltgt.apt' version '0.10'
+    id 'java'
+    id 'eclipse'
+    id 'project-report'
+}
+
+springBoot {
+    mainClass = 'com.bmo.ibackend.Application'
+}
+
+tasks.withType(JavaCompile) {
+    //enable compilation in a separate daemon process
+    options.fork = true
+
+    //enable incremental compilation
+    options.incremental = true
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+	compile 'org.apache.commons:commons-lang3:3.6'
+	compile 'commons-io:commons-io:2.5'
+    compile 'org.springframework.boot:spring-boot-starter-web:1.5.9.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-websocket:1.5.9.RELEASE'
+    compile('org.springframework.boot:spring-boot-starter-jdbc:1.5.9.RELEASE') {
+		exclude group: 'org.apache.tomcat', module: 'tomcat-jdbc'
+    }
+    compile 'cglib:cglib:3.2.5'
+    compile 'com.github.spullara.mustache.java:compiler:0.9.5'
+    compile 'org.springframework.boot:spring-boot-devtools'
+    compile 'ch.qos.logback:logback-classic'
+    compile 'org.mariadb.jdbc:mariadb-java-client:2.1.0'
+    compile 'com.google.guava:guava:22.0'
+    compile 'com.zaxxer:HikariCP:2.6.1'
+    
+    compileOnly 'org.projectlombok:lombok:1.16.18'
+	testCompile 'org.projectlombok:lombok:1.16.18'
+
+	apt "org.projectlombok:lombok:1.16.18"
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+bootRun {
+    addResources = true
+}
+

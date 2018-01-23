@@ -1,0 +1,22 @@
+package {{packageName}};
+
+import com.bmo.ibackend.persistence.Column;
+import com.bmo.ibackend.persistence.Id;
+import com.bmo.ibackend.persistence.Table;
+
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.experimental.FieldDefaults;
+
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Data
+@Table
+public class {{className}} {
+	{{#fields}}
+	{{#id}}
+	@Id
+	{{/id}}
+	@Column
+	{{fieldType}} {{fieldName}}; // SQL Type: {{sqlType}} size:{{size}}
+	{{/fields}}
+}
